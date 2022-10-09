@@ -9,7 +9,7 @@
     <div class="weather">
       <img
         class="weather-icon"
-        :src="`http://openweathermap.org/img/wn/${weather?.iconUrl}@2x.png`"
+        :src="`https://openweathermap.org/img/wn/${weather?.iconUrl}@2x.png`"
         alt="weather icon"
       />
       <h1 :class="{ placeholder: isLoading }">{{ weather?.temp }}°C</h1>
