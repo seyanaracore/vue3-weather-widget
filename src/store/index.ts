@@ -1,14 +1,26 @@
-import { createStore } from 'vuex';
+import { InjectionKey } from 'vue'
+import { createStore, useStore as baseUseStore, Store as VuexStore } from 'vuex'
+import {
+  store as citiesList,
+  CitiesListStore,
+  State as CitiesListState,
+} from '@/store/modules/citiesList'
+
+export type RootState = {
+  citiesList: CitiesListState
+}
+
+type Store = WeathersStore<Pick<RootState, 'weathers'>> &
+
+// eslint-disable-next-line symbol-description
+export const key: InjectionKey<VuexStore<RootState>> = Symbol()
+
+export function useStore(): Store {
+  return baseUseStore(key)
+}
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    citiesList,
   },
-});
+})
