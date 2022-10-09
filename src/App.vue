@@ -11,9 +11,14 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useStore } from './store'
+import { CitiesListGettersTypes } from './store/modules/citiesList/getters'
 import Weathers from './views/WeathersView.vue'
 import Configuration from './views/ConfigView.vue'
+
+const store = useStore()
 const isConfigView = ref(false)
+const isConfigurable = computed(() => store.getters[CitiesListGettersTypes.GET_IS_CONFIGURABLE])
 
 const configViewToggle = () => {
   isConfigView.value = !isConfigView.value
