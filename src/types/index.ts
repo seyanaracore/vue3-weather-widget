@@ -1,4 +1,4 @@
-import { WeatherRequestParams } from '@/service/openWeather/types'
+import { WeatherRequestParams } from '@/services/openWeather/types'
 
 export type City = string
 export type WeatherQueryByCity = Required<Pick<WeatherRequestParams, 'city'>>
