@@ -1,4 +1,9 @@
-# vue3-weather-widget
+# Vue 3 Weather widget
+
+## Project build link
+```
+https://seyanaracore.github.io/vue3-weather-widget/dist/build.js
+```
 
 ## Project setup
 ```
