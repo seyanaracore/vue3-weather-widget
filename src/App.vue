@@ -1,27 +1,49 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="entrance">
+    <button @click="configViewToggle" class="btn view-toggler-btn" :disabled="!isConfigurable">
+      <i v-if="!isConfigView" class="bi bi-gear big"></i>
+      <i v-else class="bi bi-x-lg big"></i>
+    </button>
+    <Configuration v-if="isConfigView" />
+    <Weathers v-else />
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import useCitiesListStore from '@/stores/citiesList'
+import Weathers from './views/WeathersView.vue'
+import Configuration from './views/ConfigView.vue'
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld,
-  },
-});
+const citiesListStore = useCitiesListStore()
+const isConfigView = ref(false)
+const isConfigurable = computed(() => citiesListStore.configurable)
+
+const configViewToggle = () => {
+  isConfigView.value = !isConfigView.value
+}
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped lang="scss">
+#entrance {
+  position: relative; // for view-button
+
+  max-width: 260px;
+  padding: 10px;
+}
+
+.view-toggler-btn {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+
+  padding: 0;
+
+  border: none;
+
+  &:disabled {
+    pointer-events: all !important;
+    cursor: not-allowed;
+  }
 }
 </style>

@@ -1,5 +1,6 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import store from './store';
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import '@/styles/index.scss'
+import App from './App.vue'
 
-createApp(App).use(store).mount('#app');
+createApp(App).use(createPinia()).mount('weather-widget')
