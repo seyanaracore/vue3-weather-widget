@@ -47,6 +47,11 @@ const addCity = async () => {
 const { fetching: addNewCity, isLoading, isError } = useFetching(addCity)
 
 const submitNewCity = () => {
+  if (!cityName.value) {
+    isError.value = 'Please enter a city name'
+    return
+  }
+
   addNewCity()
   cityName.value = ''
 }
