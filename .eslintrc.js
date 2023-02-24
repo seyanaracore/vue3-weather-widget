@@ -18,7 +18,7 @@ module.exports = {
     sourceType: "module",
     project: ["tsconfig.json"]
   },
-  ignorePatterns: ["src/main.ts", ".eslintrc.js", ".stylelintrc.js"],
+  ignorePatterns: ["src/main.ts", ".eslintrc.js", ".stylelintrc.js", 'dist/*'],
   parser: "vue-eslint-parser",
   rules: {
     "@typescript-eslint/no-floating-promises": "off",
