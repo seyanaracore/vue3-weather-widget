@@ -1,6 +1,9 @@
 # Vue 3 Weather widget
 
-## Project build link
+## Project deployment
+See [project deployment](https://vue3-weather-widget.vercel.app/).
+
+## Widget build link
 ```
 https://seyanaracore.github.io/vue3-weather-widget/dist/build.js
 ```
