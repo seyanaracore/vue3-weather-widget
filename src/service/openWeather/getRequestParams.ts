@@ -1,4 +1,4 @@
-import { IWeatherRequestParams, IWeatherAPIRequestParams } from '@/types/openWeather'
+import { type IWeatherRequestParams, type IWeatherAPIRequestParams } from '@/types/openWeather'
 import { EWeatherAPIRequestParams } from '@/constants/openWeather'
 
 type TParams = Partial<IWeatherRequestParams>

@@ -39,5 +39,8 @@ export type IWeatherAPIRequestParams = {
   [key in EWeatherAPIRequestParams]: string
 }
 
-export type IWeatherRequestParamsByCity = IWeatherRequestParams['cityName']
+export type IWeatherRequestParamsByCity = Pick<IWeatherRequestParams, 'cityName'>
 export type IWeatherRequestParamsByCoords = Pick<IWeatherRequestParams, 'latitude' | 'longitude'>
+export type IWeatherRequestPossibleParams =
+  | IWeatherRequestParamsByCity
+  | IWeatherRequestParamsByCoords

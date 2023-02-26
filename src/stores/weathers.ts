@@ -1,11 +1,9 @@
 import { defineStore } from 'pinia'
-import OpenWeatherService from '@/service/openWeather/api'
-import { type ICityItem, type IWeatherItem } from '@/types'
+import { type ICityItem } from '@/types'
 import { type IWeatherState } from '@/types/stores/weathersStore'
-import {
-  type IWeatherRequestParamsByCity,
-  type IWeatherRequestParamsByCoords,
-} from '@/types/openWeather'
+import { IWeatherRequestPossibleParams } from '@/types/openWeather'
+import getWeather from '@/service/openWeather/api'
+import WeatherItem from '@/models/weather'
 
 const useWeathersStore = defineStore('weathers', {
   state: (): IWeatherState => ({
@@ -14,21 +12,15 @@ const useWeathersStore = defineStore('weathers', {
   getters: {
     getCityWeather:
       state =>
-      (cityName: ICityItem['name']): IWeatherItem =>
+      (cityName: ICityItem['name']): WeatherItem =>
         state.weathers[cityName],
   },
   actions: {
-    addCityWeather(weather: IWeatherItem) {
+    addCityWeather(weather: WeatherItem) {
       this.weathers[weather.city] = weather
     },
-    async getWeatherByCoords(coords: IWeatherRequestParamsByCoords) {
-      const weather = await OpenWeatherService.getWeatherByCoords(coords)
-
-      this.addCityWeather(weather)
-      return weather
-    },
-    async getWeatherByCityName(cityName: IWeatherRequestParamsByCity) {
-      const weather = await OpenWeatherService.getWeatherByCityName(cityName)
+    async getWeather(params: IWeatherRequestPossibleParams) {
+      const weather = await getWeather(params)
 
       this.addCityWeather(weather)
       return weather

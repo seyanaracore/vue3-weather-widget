@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import LocalStorageUtil from '@/utils/localStorageUtil'
 import { WEATHER_CONFIGURATION_LC_KEY } from '@/constants'
-import OpenWeatherService from '@/service/openWeather/api'
 import { type ICityItem } from '@/types'
 import { type ICitiesListState, type ICityPriority } from '@/types/stores/citiesStore'
 import { type IWeatherRequestParamsByCity } from '@/types/openWeather'
+import getWeather from '@/service/openWeather/api'
 
 const useCitiesListStore = defineStore('citiesList', {
   state: (): ICitiesListState => ({
@@ -22,9 +22,9 @@ const useCitiesListStore = defineStore('citiesList', {
 
       if (isNewCity) this.citiesList.push(newCity)
     },
-    async addCityByName(name: IWeatherRequestParamsByCity) {
+    async addCityByName(cityName: IWeatherRequestParamsByCity['cityName']) {
       try {
-        const { id, city } = await OpenWeatherService.getWeatherByCityName(name)
+        const { id, city } = await getWeather({ cityName })
 
         this.addCity({
           id,

@@ -28,8 +28,8 @@ const weatherStore = useWeathersStore()
 const citiesListStore = useCitiesListStore()
 
 const addCityByLocation = async (coords: IWeatherRequestParamsByCoords) => {
-  // check city name by get weather by coords
-  const { id, city } = await weatherStore.getWeatherByCoords(coords)
+  // get city name by get weather by coords
+  const { id, city } = await weatherStore.getWeather(coords)
 
   citiesListStore.addCity({ id, name: city })
 }

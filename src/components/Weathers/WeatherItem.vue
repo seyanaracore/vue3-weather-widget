@@ -42,7 +42,7 @@ const tryAgainText = 'Try again'
 const errorText = 'Some went wrong'
 const weatherStore = useWeathersStore()
 const weather = computed(() => weatherStore.getCityWeather(props.cityName))
-const getWeather = () => weatherStore.getWeatherByCityName(props.cityName)
+const getWeather = () => weatherStore.getWeather({ cityName: props.cityName })
 const { fetching: fetchWeather, isLoading, isError } = useFetching(getWeather)
 const isPlaceholderClass = computed(() => ({ placeholder: isLoading.value }))
 

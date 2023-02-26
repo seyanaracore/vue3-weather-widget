@@ -31,7 +31,6 @@ import Loader from '@/components/UI/LoaderUI.vue'
 import Error from '@/components/UI/ErrorUi.vue'
 import Header from '@/components/UI/HeaderUi.vue'
 import useFetching from '@/hooks/useFetching'
-import type { IWeatherRequestParamsByCity } from '@/types/openWeather'
 import useCitiesListStore from '@/stores/citiesList'
 
 const cityName = ref<string>('')
@@ -39,9 +38,7 @@ const cityInput = ref<HTMLInputElement>()
 const citiesListStore = useCitiesListStore()
 
 const addCity = async () => {
-  const city: IWeatherRequestParamsByCity = cityName.value
-
-  await citiesListStore.addCityByName(city)
+  await citiesListStore.addCityByName(cityName.value)
 }
 
 const { fetching: addNewCity, isLoading, isError } = useFetching(addCity)
