@@ -33,6 +33,7 @@ const citiesListStore = useCitiesListStore()
 const deleteCity = () => citiesListStore.deleteCity(props.city.id)
 const changePriority = (params: ICityPriority) => citiesListStore.setCityPriority(params)
 
+/** transfer id dragged el */
 const startDrag = (e: DragEvent, id: ICityItem['id']) => {
   if (!e.dataTransfer) return
   e.dataTransfer.dropEffect = 'move'
@@ -40,11 +41,13 @@ const startDrag = (e: DragEvent, id: ICityItem['id']) => {
   e.dataTransfer.setData('id', id)
 }
 
+/** get id from dragged el and change priority */
 const onDrop = (draggedEl: DragEvent, idx: Idx) => {
   if (!draggedEl.dataTransfer) return
 
   const id: ICityItem['id'] = draggedEl.dataTransfer.getData('id')
 
+  if (!id) return
   changePriority({ id, idx })
 }
 
