@@ -42,9 +42,9 @@ const useCitiesListStore = defineStore('citiesList', {
     },
     /**
      * Change city priority
-     * @param city
-     * @param city.id target city id
-     * @param city.idx new index for target city
+     * @param {ICityPriority} city payload params
+     * @param {ICityPriority['id']} city.id target city id
+     * @param {ICityPriority['idx']} city.idx new index for target city
      */
     setCityPriority(city: ICityPriority) {
       // find target index
