@@ -27,14 +27,8 @@ import WeatherItem from './WeatherItem.vue'
 const weatherStore = useWeathersStore()
 const citiesListStore = useCitiesListStore()
 
-const addCityByLocation = async (coords: IWeatherRequestParamsByCoords) => {
-  // get city name by get weather by coords
-  const { id, city } = await weatherStore.getWeather(coords)
-
-  citiesListStore.addCity({ id, name: city })
-}
-
-const addCity = async () => {
+const initWeatherCb = async () => {
+  // trying get coords
   const { coords: posCoords } = await useLocation()
 
   const coords: IWeatherRequestParamsByCoords = {
@@ -42,10 +36,17 @@ const addCity = async () => {
     longitude: posCoords.longitude.toString(),
   }
 
-  await addCityByLocation(coords)
+  /*
+   Determine the weather by coordinates and save it.
+   Get the ID and name of the city from the weather object
+   */
+  const { id, city } = await weatherStore.getWeather(coords)
+
+  // adding city to cities list
+  citiesListStore.addCity({ id, name: city })
 }
 
-const { fetching: requestLocation, isLoading } = useFetching(addCity)
+const { fetching: initWeather, isLoading } = useFetching(initWeatherCb)
 const citiesList = computed(() => citiesListStore.citiesList)
 const isConfigurable = computed(() => citiesListStore.configurable)
 const saveConfiguration = () => citiesListStore.saveConfiguration()
@@ -56,7 +57,7 @@ useWatchCitiesList(citiesList, saveConfiguration)
 watch(
   () => isConfigurable.value,
   () => {
-    if (isConfigurable.value && !citiesList.value.length) requestLocation() // if is configurable and no cities then we can request user location
+    if (isConfigurable.value && !citiesList.value.length) initWeather() // if is configurable and no cities then we can request user location
   }
 )
 
