@@ -8,7 +8,6 @@ class LocalStorageUtil {
       if (!lcItem) return null
       return JSON.parse(lcItem)
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error)
     }
 
