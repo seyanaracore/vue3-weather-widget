@@ -23,16 +23,12 @@ const useCitiesListStore = defineStore('citiesList', {
       if (isNewCity) this.citiesList.push(newCity)
     },
     async addCityByName(cityName: IWeatherRequestParamsByCity['cityName']) {
-      try {
-        const { id, city } = await getWeather({ cityName })
+      const { id, city } = await getWeather({ cityName })
 
-        this.addCity({
-          id,
-          name: city,
-        })
-      } catch (e) {
-        throw Error('City not found')
-      }
+      this.addCity({
+        id,
+        name: city,
+      })
     },
     setConfigurable(payload: boolean) {
       this.configurable = payload
