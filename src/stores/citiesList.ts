@@ -62,11 +62,11 @@ const useCitiesListStore = defineStore('citiesList', {
 
       this.citiesList = filtered
     },
-    /** Saving to storage */
+    /** Saving config to storage */
     saveConfiguration() {
       LocalStorageUtil.set(this.citiesList, WEATHER_CONFIGURATION_LC_KEY)
     },
-    /** Set configuration from storage */
+    /** Set configuration from storage to store */
     setConfiguration() {
       const savedCitiesList = LocalStorageUtil.get(WEATHER_CONFIGURATION_LC_KEY)
 

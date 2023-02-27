@@ -17,11 +17,8 @@ import useCitiesListStore from '@/stores/citiesList'
 
 const citiesListStore = useCitiesListStore()
 
-const disableConfigurable = () => {
-  citiesListStore.setConfigurable(false)
-}
-
 onUnmounted(() => {
-  disableConfigurable()
+  // on exit - disable configuration page
+  citiesListStore.setConfigurable(false)
 })
 </script>

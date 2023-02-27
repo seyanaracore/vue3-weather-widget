@@ -14,13 +14,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import NoCities from '@/components/NoCities.vue'
-import useWatchCitiesList from '@/hooks/useWatchCitiesList'
 import useCitiesListStore from '@/stores/citiesList'
 import CityItem from './CityItem.vue'
 
 const citiesListStore = useCitiesListStore()
 const citiesList = computed(() => citiesListStore.citiesList)
-const saveConfiguration = () => citiesListStore.saveConfiguration()
-
-useWatchCitiesList(citiesList, saveConfiguration) // when cities list has changed - saving
 </script>

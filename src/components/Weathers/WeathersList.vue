@@ -13,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import useFetching from '@/hooks/useFetching'
-import useWatchCitiesList from '@/hooks/useWatchCitiesList'
 import useLocation from '@/hooks/useLocation'
 import Loader from '@/components/UI/LoaderUI.vue'
 import NoCities from '@/components/NoCities.vue'
@@ -49,18 +48,6 @@ const initWeatherCb = async () => {
 const { fetching: initWeather, isLoading } = useFetching(initWeatherCb)
 const citiesList = computed(() => citiesListStore.citiesList)
 const isConfigurable = computed(() => citiesListStore.configurable)
-const saveConfiguration = () => citiesListStore.saveConfiguration()
-const setConfiguration = () => citiesListStore.setConfiguration()
 
-useWatchCitiesList(citiesList, saveConfiguration)
-
-watch(
-  () => isConfigurable.value,
-  () => {
-    if (isConfigurable.value && !citiesList.value.length) initWeather() // if is configurable and no cities then we can request user location
-  }
-)
-
-setConfiguration() // set configuration into store
-saveConfiguration() // creating an initial entry in local storage (user may reject request location and refresh page)
+if (isConfigurable.value) initWeather() // if is configurable then we can request user location
 </script>
