@@ -1,4 +1,5 @@
 const config = require('./src/configs/ts-config')
+const { tsConfigAliases } = require('./src/build')
 
 module.exports = {
   ...config,
@@ -12,4 +13,16 @@ module.exports = {
     'plugin:import/recommended',
     'prettier',
   ],
+  parserOptions: {
+    ...config.parserOptions,
+    tsconfigRootDir: __dirname,
+  },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: tsConfigAliases,
+        extensions: ['.js', '.ts'],
+      },
+    },
+  },
 }
